@@ -39,7 +39,7 @@ export default function Home() {
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <a
-              href="#reservation"
+              href="/reservation"
               className="rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl"
             >
               Réserver
@@ -514,6 +514,7 @@ export default function Home() {
 
       {/* ==================== RESERVATION ==================== */}
       <section id="reservation" className="min-h-[500px]" />
+      
     </main>
   );
 }

@@ -85,7 +85,7 @@ export default function Header() {
 
         {/* Booking button */}
         <a
-          href="#reservation"
+          href="/reservation"
           className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-lg"
         >
           Réserver
