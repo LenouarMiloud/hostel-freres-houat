@@ -1,49 +1,62 @@
+"use client";
+
+import { useState } from "react";
+
 export default function ReservationPage() {
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+
+  const today = new Date();
+  const todayString = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0"),
+  ].join("-");
+
+  const nights =
+    checkIn && checkOut
+      ? Math.round(
+          (new Date(`${checkOut}T12:00:00`).getTime() -
+            new Date(`${checkIn}T12:00:00`).getTime()) /
+            (1000 * 60 * 60 * 24),
+        )
+      : 0;
+
   return (
     <main className="min-h-screen bg-background">
-      {/* Header الخاص بصفحة الحجز */}
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-          <a
-            href="/"
-            className="text-sm font-bold text-primary sm:text-base"
-          >
+          <a href="/" className="text-sm font-bold text-primary sm:text-base">
             ← Hostel Frères Houat
           </a>
-
           <a
             href="/"
-            className="text-sm font-medium text-muted transition-colors hover:text-primary"
+            className="text-sm font-medium text-muted hover:text-primary"
           >
             Accueil
           </a>
         </div>
       </header>
 
-      {/* Introduction */}
       <section className="px-4 pb-8 pt-10 sm:px-6 sm:pt-14">
         <div className="mx-auto max-w-7xl">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent">
             Hostel Frères Houat · Maghnia
           </p>
-
           <h1 className="mt-3 text-3xl font-bold text-primary sm:text-4xl lg:text-5xl">
             Réservez votre séjour
           </h1>
-
           <p className="mt-4 max-w-2xl leading-7 text-muted">
-            Préparez votre séjour en quelques étapes.
-            Envoyez votre demande et nous vous contacterons
-            pour confirmer votre réservation.
+            Préparez votre séjour en quelques étapes. Envoyez votre demande
+            et nous vous contacterons pour confirmer votre réservation.
           </p>
         </div>
       </section>
 
-      {/* Zone principale : formulaire et résumé */}
       <section className="px-4 pb-16 sm:px-6">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Zone du formulaire */}
           <div className="space-y-6 lg:col-span-2">
+            {/* Dates du séjour */}
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
               <h2 className="text-xl font-bold text-primary">
                 Dates du séjour
@@ -51,8 +64,70 @@ export default function ReservationPage() {
               <p className="mt-2 text-sm text-muted">
                 Choisissez vos dates d'arrivée et de départ.
               </p>
+
+              <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="checkIn"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
+                    Date d'arrivée
+                  </label>
+                  <input
+                    id="checkIn"
+                    type="date"
+                    min={todayString}
+                    value={checkIn}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      setCheckIn(value);
+
+                      if (checkOut && checkOut <= value) {
+                        setCheckOut("");
+                      }
+                    }}
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="checkOut"
+                    className="mb-2 block text-sm font-medium text-foreground"
+                  >
+                    Date de départ
+                  </label>
+                  <input
+                    id="checkOut"
+                    type="date"
+                    min={checkIn ? getNextDate(checkIn) : getNextDate(todayString)}
+                    value={checkOut}
+                    disabled={!checkIn}
+                    onChange={(event) => setCheckOut(event.target.value)}
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:bg-gray-100"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-xl bg-background p-4">
+                <p className="text-sm text-muted">Nombre de nuits</p>
+                <p className="mt-1 text-2xl font-bold text-primary">
+                  {nights > 0 ? nights : "—"}
+                  {nights > 0 && (
+                    <span className="ml-2 text-sm font-normal text-muted">
+                      {nights === 1 ? "nuit" : "nuits"}
+                    </span>
+                  )}
+                </p>
+                {checkIn && checkOut && nights > 0 && (
+                  <p className="mt-2 text-sm text-success">
+                    Dates sélectionnées avec succès.
+                  </p>
+                )}
+              </div>
             </section>
 
+            {/* Autres sections — à compléter progressivement */}
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
               <h2 className="text-xl font-bold text-primary">
                 Nombre de personnes
@@ -67,8 +142,7 @@ export default function ReservationPage() {
                 Informations du client
               </h2>
               <p className="mt-2 text-sm text-muted">
-                Vos coordonnées seront utilisées pour vous contacter
-                au sujet de votre demande.
+                Vos coordonnées seront utilisées pour vous contacter.
               </p>
             </section>
 
@@ -77,7 +151,7 @@ export default function ReservationPage() {
                 Demandes particulières
               </h2>
               <p className="mt-2 text-sm text-muted">
-                Vous pouvez préciser vos besoins ou laisser ce champ vide.
+                Précisez vos besoins si nécessaire.
               </p>
             </section>
           </div>
@@ -87,11 +161,26 @@ export default function ReservationPage() {
             <h2 className="text-xl font-bold text-primary">
               Résumé de la réservation
             </h2>
-
-            <p className="mt-3 text-sm leading-6 text-muted">
-              Les dates, le nombre de personnes et le prix total
-              apparaîtront ici.
-            </p>
+            <div className="mt-5 space-y-4 text-sm">
+              <div>
+                <p className="text-muted">Arrivée</p>
+                <p className="mt-1 font-medium text-foreground">
+                  {checkIn || "À sélectionner"}
+                </p>
+              </div>
+              <div>
+                <p className="text-muted">Départ</p>
+                <p className="mt-1 font-medium text-foreground">
+                  {checkOut || "À sélectionner"}
+                </p>
+              </div>
+              <div>
+                <p className="text-muted">Nombre de nuits</p>
+                <p className="mt-1 font-medium text-foreground">
+                  {nights > 0 ? nights : "—"}
+                </p>
+              </div>
+            </div>
 
             <div className="mt-6 rounded-xl bg-background p-4">
               <p className="text-sm font-medium text-primary">
@@ -101,14 +190,20 @@ export default function ReservationPage() {
                 Aucun paiement en ligne n'est nécessaire.
               </p>
             </div>
-
-            <p className="mt-5 text-xs leading-5 text-muted">
-              Votre demande sera en attente jusqu'à sa confirmation
-              par le responsable.
-            </p>
           </aside>
         </div>
       </section>
     </main>
   );
+}
+
+function getNextDate(date: string) {
+  const nextDate = new Date(`${date}T12:00:00`);
+  nextDate.setDate(nextDate.getDate() + 1);
+
+  const year = nextDate.getFullYear();
+  const month = String(nextDate.getMonth() + 1).padStart(2, "0");
+  const day = String(nextDate.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
