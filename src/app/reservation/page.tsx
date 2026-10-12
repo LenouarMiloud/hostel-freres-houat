@@ -5,6 +5,7 @@ import { useState } from "react";
 export default function ReservationPage() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+  const [guests, setGuests] = useState(1);
 
   const today = new Date();
   const todayString = [
@@ -129,13 +130,52 @@ export default function ReservationPage() {
 
             {/* Autres sections — à compléter progressivement */}
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
-              <h2 className="text-xl font-bold text-primary">
-                Nombre de personnes
-              </h2>
-              <p className="mt-2 text-sm text-muted">
-                La capacité maximale est de 10 personnes.
-              </p>
-            </section>
+  <h2 className="text-xl font-bold text-primary">
+    Nombre de personnes
+  </h2>
+
+  <p className="mt-2 text-sm text-muted">
+    Indiquez le nombre de personnes qui séjourneront dans l'hébergement.
+  </p>
+
+  <div className="mt-6 flex items-center justify-between gap-4">
+    <div>
+      <p className="font-semibold text-foreground">Voyageurs</p>
+      <p className="mt-1 text-sm text-muted">
+        Maximum 10 personnes
+      </p>
+    </div>
+
+    <div className="flex items-center gap-4">
+      <button
+        type="button"
+        onClick={() => setGuests((current) => Math.max(1, current - 1))}
+        disabled={guests <= 1}
+        aria-label="Diminuer le nombre de personnes"
+        className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-xl font-semibold text-primary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        −
+      </button>
+
+      <span
+        className="min-w-6 text-center text-xl font-bold text-primary"
+        aria-live="polite"
+      >
+        {guests}
+      </span>
+
+      <button
+        type="button"
+        onClick={() => setGuests((current) => Math.min(10, current + 1))}
+        disabled={guests >= 10}
+        aria-label="Augmenter le nombre de personnes"
+        className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-xl font-semibold text-primary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        +
+      </button>
+    </div>
+  </div>
+</section>
 
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
               <h2 className="text-xl font-bold text-primary">
@@ -178,6 +218,12 @@ export default function ReservationPage() {
                 <p className="text-muted">Nombre de nuits</p>
                 <p className="mt-1 font-medium text-foreground">
                   {nights > 0 ? nights : "—"}
+                </p>
+              </div>
+              <div>
+                <p className="text-muted">Nombre de personnes</p>
+                <p className="mt-1 font-medium text-foreground">
+                  {guests} {guests === 1 ? "personne" : "personnes"}
                 </p>
               </div>
             </div>
