@@ -11,6 +11,7 @@ export default function ReservationPage() {
   const [phone, setPhone] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [email, setEmail] = useState("");
+  const [specialRequests, setSpecialRequests] = useState("");
 
   const today = new Date();
   const todayString = [
@@ -278,13 +279,35 @@ export default function ReservationPage() {
             </section>
 
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
-              <h2 className="text-xl font-bold text-primary">
-                Demandes particulières
-              </h2>
-              <p className="mt-2 text-sm text-muted">
-                Précisez vos besoins si nécessaire.
-              </p>
-            </section>
+  <h2 className="text-xl font-bold text-primary">
+    Demandes particulières
+  </h2>
+
+  <p className="mt-2 text-sm text-muted">
+    Vous avez une demande particulière concernant votre séjour ?
+    Vous pouvez nous la préciser ici.
+  </p>
+
+  <div className="mt-6">
+    <label
+      htmlFor="specialRequests"
+      className="mb-2 block text-sm font-medium text-foreground"
+    >
+      Vos demandes
+      <span className="ml-2 font-normal text-muted">(optionnel)</span>
+    </label>
+
+    <textarea
+      id="specialRequests"
+      name="specialRequests"
+      rows={4}
+      value={specialRequests}
+      onChange={(event) => setSpecialRequests(event.target.value)}
+      placeholder="Précisez vos besoins ou vos remarques..."
+      className="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3 text-foreground outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+    />
+  </div>
+</section>
           </div>
 
           {/* Résumé de la réservation */}
@@ -317,6 +340,46 @@ export default function ReservationPage() {
                   {guests} {guests === 1 ? "personne" : "personnes"}
                 </p>
               </div>
+              <div className="border-t border-gray-100 pt-4">
+                <p className="text-sm text-muted">Nom du client</p>
+                <p className="mt-1 font-medium text-foreground">
+                  {firstName || lastName
+                    ? `${firstName} ${lastName}`.trim()
+                    : "À renseigner"}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-muted">Téléphone</p>
+                <p className="mt-1 break-words font-medium text-foreground">
+                  {phone || "À renseigner"}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-muted">WhatsApp</p>
+                <p className="mt-1 break-words font-medium text-foreground">
+                  {whatsapp || "À renseigner"}
+                </p>
+              </div>
+
+              {email && (
+                <div>
+                  <p className="text-sm text-muted">Email</p>
+                  <p className="mt-1 break-words font-medium text-foreground">
+                    {email}
+                  </p>
+                </div>
+              )}
+
+              {specialRequests.trim() && (
+                <div>
+                  <p className="text-sm text-muted">Demandes particulières</p>
+                  <p className="mt-1 whitespace-pre-wrap break-words text-foreground">
+                    {specialRequests}
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="mt-6 rounded-xl bg-background p-4">
