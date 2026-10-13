@@ -6,6 +6,11 @@ export default function ReservationPage() {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [email, setEmail] = useState("");
 
   const today = new Date();
   const todayString = [
@@ -130,59 +135,145 @@ export default function ReservationPage() {
 
             {/* Autres sections — à compléter progressivement */}
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
-  <h2 className="text-xl font-bold text-primary">
-    Nombre de personnes
-  </h2>
+              <h2 className="text-xl font-bold text-primary">
+                Nombre de personnes
+              </h2>
 
-  <p className="mt-2 text-sm text-muted">
-    Indiquez le nombre de personnes qui séjourneront dans l'hébergement.
-  </p>
+              <p className="mt-2 text-sm text-muted">
+                Indiquez le nombre de personnes qui séjourneront dans l'hébergement.
+              </p>
 
-  <div className="mt-6 flex items-center justify-between gap-4">
-    <div>
-      <p className="font-semibold text-foreground">Voyageurs</p>
-      <p className="mt-1 text-sm text-muted">
-        Maximum 10 personnes
-      </p>
-    </div>
+              <div className="mt-6 flex items-center justify-between gap-4">
+                <div>
+                  <p className="font-semibold text-foreground">Voyageurs</p>
+                  <p className="mt-1 text-sm text-muted">
+                    Maximum 10 personnes
+                  </p>
+                </div>
 
-    <div className="flex items-center gap-4">
-      <button
-        type="button"
-        onClick={() => setGuests((current) => Math.max(1, current - 1))}
-        disabled={guests <= 1}
-        aria-label="Diminuer le nombre de personnes"
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-xl font-semibold text-primary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        −
-      </button>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setGuests((current) => Math.max(1, current - 1))}
+                    disabled={guests <= 1}
+                    aria-label="Diminuer le nombre de personnes"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-xl font-semibold text-primary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    −
+                  </button>
 
-      <span
-        className="min-w-6 text-center text-xl font-bold text-primary"
-        aria-live="polite"
-      >
-        {guests}
-      </span>
+                  <span
+                    className="min-w-6 text-center text-xl font-bold text-primary"
+                    aria-live="polite"
+                  >
+                    {guests}
+                  </span>
 
-      <button
-        type="button"
-        onClick={() => setGuests((current) => Math.min(10, current + 1))}
-        disabled={guests >= 10}
-        aria-label="Augmenter le nombre de personnes"
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-xl font-semibold text-primary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        +
-      </button>
-    </div>
-  </div>
-</section>
+                  <button
+                    type="button"
+                    onClick={() => setGuests((current) => Math.min(10, current + 1))}
+                    disabled={guests >= 10}
+                    aria-label="Augmenter le nombre de personnes"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-xl font-semibold text-primary transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </section>
 
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
               <h2 className="text-xl font-bold text-primary">
                 Informations du client
               </h2>
+
               <p className="mt-2 text-sm text-muted">
-                Vos coordonnées seront utilisées pour vous contacter.
+                Ces informations nous permettront de vous contacter au sujet de votre réservation.
+              </p>
+
+              <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-foreground">
+                    Prénom *
+                  </label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    autoComplete="given-name"
+                    required
+                    value={firstName}
+                    onChange={(event) => setFirstName(event.target.value)}
+                    placeholder="Votre prénom"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="lastName" className="mb-2 block text-sm font-medium text-foreground">
+                    Nom *
+                  </label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    autoComplete="family-name"
+                    required
+                    value={lastName}
+                    onChange={(event) => setLastName(event.target.value)}
+                    placeholder="Votre nom"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="mb-2 block text-sm font-medium text-foreground">
+                    Téléphone *
+                  </label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    required
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    placeholder="Ex. : 0550 12 34 56"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="whatsapp" className="mb-2 block text-sm font-medium text-foreground">
+                    WhatsApp *
+                  </label>
+                  <input
+                    id="whatsapp"
+                    type="tel"
+                    autoComplete="tel"
+                    required
+                    value={whatsapp}
+                    onChange={(event) => setWhatsapp(event.target.value)}
+                    placeholder="Votre numéro WhatsApp"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
+                    Email <span className="font-normal text-muted">(optionnel)</span>
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    placeholder="exemple@email.com"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs text-muted">
+                * Champs obligatoires
               </p>
             </section>
 
