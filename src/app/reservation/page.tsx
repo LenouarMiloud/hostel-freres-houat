@@ -12,6 +12,8 @@ export default function ReservationPage() {
   const [whatsapp, setWhatsapp] = useState("");
   const [email, setEmail] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
+  const [formError, setFormError] = useState("");
+const [formSuccess, setFormSuccess] = useState(false);
 
   const today = new Date();
   const todayString = [
@@ -28,6 +30,29 @@ export default function ReservationPage() {
             (1000 * 60 * 60 * 24),
         )
       : 0;
+      function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  setFormError("");
+  setFormSuccess(false);
+
+  if (!checkIn || !checkOut || nights <= 0) {
+    setFormError("Veuillez sélectionner des dates de séjour valides.");
+    return;
+  }
+
+  if (
+    !firstName.trim() ||
+    !lastName.trim() ||
+    !phone.trim() ||
+    !whatsapp.trim()
+  ) {
+    setFormError("Veuillez remplir tous les champs obligatoires.");
+    return;
+  }
+
+  setFormSuccess(true);
+}
 
   return (
     <main className="min-h-screen bg-background">
@@ -62,7 +87,7 @@ export default function ReservationPage() {
 
       <section className="px-4 pb-16 sm:px-6">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 lg:grid-cols-3">
-          <div className="space-y-6 lg:col-span-2">
+          <form onSubmit={handleSubmit} className="space-y-6 lg:col-span-2" noValidate> 
             {/* Dates du séjour */}
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
               <h2 className="text-xl font-bold text-primary">
@@ -279,36 +304,60 @@ export default function ReservationPage() {
             </section>
 
             <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
-  <h2 className="text-xl font-bold text-primary">
-    Demandes particulières
-  </h2>
+              <h2 className="text-xl font-bold text-primary">
+                Demandes particulières
+              </h2>
 
-  <p className="mt-2 text-sm text-muted">
-    Vous avez une demande particulière concernant votre séjour ?
-    Vous pouvez nous la préciser ici.
-  </p>
+              <p className="mt-2 text-sm text-muted">
+                Vous avez une demande particulière concernant votre séjour ?
+                Vous pouvez nous la préciser ici.
+              </p>
 
-  <div className="mt-6">
-    <label
-      htmlFor="specialRequests"
-      className="mb-2 block text-sm font-medium text-foreground"
-    >
-      Vos demandes
-      <span className="ml-2 font-normal text-muted">(optionnel)</span>
-    </label>
+              <div className="mt-6">
+                <label
+                  htmlFor="specialRequests"
+                  className="mb-2 block text-sm font-medium text-foreground"
+                >
+                  Vos demandes
+                  <span className="ml-2 font-normal text-muted">(optionnel)</span>
+                </label>
 
-    <textarea
-      id="specialRequests"
-      name="specialRequests"
-      rows={4}
-      value={specialRequests}
-      onChange={(event) => setSpecialRequests(event.target.value)}
-      placeholder="Précisez vos besoins ou vos remarques..."
-      className="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3 text-foreground outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
-    />
-  </div>
-</section>
-          </div>
+                <textarea
+                  id="specialRequests"
+                  name="specialRequests"
+                  rows={4}
+                  value={specialRequests}
+                  onChange={(event) => setSpecialRequests(event.target.value)}
+                  placeholder="Précisez vos besoins ou vos remarques..."
+                  className="w-full resize-y rounded-xl border border-gray-200 bg-white px-4 py-3 text-foreground outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
+                />
+              </div>
+            </section>
+              {formError && (
+              <div
+                role="alert"
+                className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+              >
+                {formError}
+              </div>
+            )}
+
+            {formSuccess && (
+              <div
+                role="status"
+                className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800"
+              >
+                Votre demande a été vérifiée avec succès. L'envoi réel sera activé lors de la prochaine étape.
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="w-full rounded-xl bg-primary px-6 py-4 font-semibold text-white shadow-sm transition hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            >
+              Envoyer ma demande de réservation
+            </button>
+          </form>
 
           {/* Résumé de la réservation */}
           <aside className="h-fit rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7 lg:sticky lg:top-6">
