@@ -31,28 +31,58 @@ const [formSuccess, setFormSuccess] = useState(false);
         )
       : 0;
       function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-  event.preventDefault();
+        event.preventDefault();
 
-  setFormError("");
-  setFormSuccess(false);
+        setFormError("");
+        setFormSuccess(false);
 
-  if (!checkIn || !checkOut || nights <= 0) {
-    setFormError("Veuillez sélectionner des dates de séjour valides.");
-    return;
-  }
+        if (!checkIn || !checkOut || nights <= 0) {
+          setFormError("Veuillez sélectionner des dates de séjour valides.");
+          return;
+        }
 
-  if (
-    !firstName.trim() ||
-    !lastName.trim() ||
-    !phone.trim() ||
-    !whatsapp.trim()
-  ) {
-    setFormError("Veuillez remplir tous les champs obligatoires.");
-    return;
-  }
+        if (
+          !firstName.trim() ||
+          !lastName.trim() ||
+          !phone.trim() ||
+          !whatsapp.trim()
+        ) {
+          setFormError("Veuillez remplir tous les champs obligatoires.");
+          return;
+        }
 
-  setFormSuccess(true);
-}
+        const bookingMessage = [
+          "🏨 *Nouvelle demande de réservation*",
+          "",
+          "📍 Hostel Frères Houat — Maghnia",
+          "",
+          "👤 *Informations du client*",
+          `Nom : ${firstName.trim()} ${lastName.trim()}`,
+          `Téléphone : ${phone.trim()}`,
+          `WhatsApp : ${whatsapp.trim()}`,
+          `Email : ${email.trim() || "Non renseigné"}`,
+          "",
+          "📅 *Détails du séjour*",
+          `Date d'arrivée : ${checkIn}`,
+          `Date de départ : ${checkOut}`,
+          `Nombre de nuits : ${nights}`,
+          `Nombre de personnes : ${guests}`,
+          "",
+          "📝 *Demandes particulières*",
+          specialRequests.trim() || "Aucune",
+          "",
+          "⏳ Statut : En attente de confirmation",
+          "💳 Paiement : À l'arrivée",
+        ].join("\n");
+
+        const whatsappUrl = `https://wa.me/213551566768?text=${encodeURIComponent(
+          bookingMessage,
+        )}`;
+
+        window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+        setFormSuccess(true);
+      }
 
   return (
     <main className="min-h-screen bg-background">
