@@ -377,7 +377,7 @@ const [formSuccess, setFormSuccess] = useState(false);
                 role="status"
                 className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800"
               >
-                Votre demande a été vérifiée avec succès. L'envoi réel sera activé lors de la prochaine étape.
+                WhatsApp a été ouvert avec votre demande préremplie. Veuillez appuyer sur « Envoyer » dans WhatsApp pour transmettre votre demande. Votre réservation ne sera confirmée qu'après validation par notre équipe.
               </div>
             )}
 
