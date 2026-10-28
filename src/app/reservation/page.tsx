@@ -73,6 +73,10 @@ const [formSuccess, setFormSuccess] = useState(false);
             setFormError("Veuillez saisir un numéro WhatsApp valide.");
             return;
           }
+          if (!Number.isInteger(guests) || guests < 1 || guests > 10) {
+            setFormError("Le nombre de personnes doit être compris entre 1 et 10.");
+            return;
+          }
 
         const bookingMessage = [
           "🏨 *Nouvelle demande de réservation*",
