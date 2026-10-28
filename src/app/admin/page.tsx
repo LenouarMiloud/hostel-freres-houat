@@ -1,3 +1,4 @@
+import AdminSidebar from "./components/AdminSidebar";
 const stats = [
   {
     title: "Réservations en attente",
@@ -47,7 +48,9 @@ const quickLinks = [
 
 export default function AdminPage() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background lg:pl-72">
+      <AdminSidebar/>
+      <div className="min-h-screen">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
           <div>
@@ -158,6 +161,7 @@ export default function AdminPage() {
         <footer className="mt-12 border-t border-gray-200 py-6 text-center text-xs text-muted">
           Hostel Frères Houat · Administration
         </footer>
+      </div>
       </div>
     </main>
   );
