@@ -36,9 +36,19 @@ const [formSuccess, setFormSuccess] = useState(false);
         setFormError("");
         setFormSuccess(false);
 
-        if (!checkIn || !checkOut || nights <= 0) {
-          setFormError("Veuillez sélectionner des dates de séjour valides.");
-          return;
+        if (!checkIn || !checkOut) {
+            setFormError("Veuillez sélectionner vos dates d'arrivée et de départ.");
+            return;
+          }
+
+          if (checkIn < todayString) {
+            setFormError("La date d'arrivée ne peut pas être dans le passé.");
+            return;
+          }
+
+          if (checkOut <= checkIn || nights <= 0) {
+            setFormError("La date de départ doit être après la date d'arrivée.");
+            return;
         }
 
         if (
