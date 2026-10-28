@@ -57,9 +57,22 @@ const [formSuccess, setFormSuccess] = useState(false);
           !phone.trim() ||
           !whatsapp.trim()
         ) {
-          setFormError("Veuillez remplir tous les champs obligatoires.");
-          return;
-        }
+            setFormError("Veuillez remplir tous les champs obligatoires.");
+            return;
+          }
+
+          const phoneDigits = phone.replace(/\D/g, "");
+          const whatsappDigits = whatsapp.replace(/\D/g, "");
+
+          if (phoneDigits.length < 8 || phoneDigits.length > 15) {
+            setFormError("Veuillez saisir un numéro de téléphone valide.");
+            return;
+          }
+
+          if (whatsappDigits.length < 8 || whatsappDigits.length > 15) {
+            setFormError("Veuillez saisir un numéro WhatsApp valide.");
+            return;
+          }
 
         const bookingMessage = [
           "🏨 *Nouvelle demande de réservation*",
