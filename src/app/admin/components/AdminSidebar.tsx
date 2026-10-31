@@ -2,17 +2,19 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const navigationItems = [
-  { label: "Tableau de bord", href: "/admin", icon: "▦", active: true },
-  { label: "Réservations", href: null, icon: "▣", active: false },
-  { label: "Logements", href: null, icon: "⌂", active: false },
-  { label: "Tarifs", href: null, icon: "€", active: false },
-  { label: "Paramètres", href: null, icon: "⚙", active: false },
+  { label: "Tableau de bord", href: "/admin", icon: "▦" },
+  { label: "Réservations", href: "/admin/bookings", icon: "▣" },
+  { label: "Logements", href: "/admin/rooms", icon: "⌂" },
+  { label: "Tarifs", href: null, icon: "€" },
+  { label: "Paramètres", href: null, icon: "⚙" },
 ];
 
 export default function AdminSidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -72,9 +74,9 @@ export default function AdminSidebar() {
                 <a
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  aria-current={item.active ? "page" : undefined}
+                  aria-current={pathname === item.href ? "page" : undefined}
                   className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition ${
-                    item.active
+                    pathname===item.href
                       ? "bg-primary text-white shadow-sm"
                       : "text-gray-600 hover:bg-gray-100 hover:text-primary"
                   }`}
