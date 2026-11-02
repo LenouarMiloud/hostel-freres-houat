@@ -1,5 +1,6 @@
 
 import AdminSidebar from "../../components/AdminSidebar";
+import Link from "next/link";
 
 type BookingDetailsPageProps = {
   params: Promise<{
@@ -24,6 +25,14 @@ export default async function BookingDetailsPage({
             <p className="mb-2 text-sm text-[#667085]">
               Administration / Réservations / Détails
             </p>
+
+            <Link
+              href="/admin/bookings"
+              className="mb-4 inline-flex items-center gap-2 text-sm font-medium text-[#2f5d7c] transition hover:text-[#17324d]"
+            >
+              <span aria-hidden="true">←</span>
+              Retour aux réservations
+            </Link>
 
             <h1 className="text-2xl font-bold text-[#17324d] md:text-3xl">
               Détails de la réservation
