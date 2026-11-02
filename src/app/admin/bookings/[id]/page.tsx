@@ -210,14 +210,44 @@ export default async function BookingDetailsPage({
                 </div>
               </section>
 
+              
               <section className="rounded-xl bg-white p-6 shadow-sm">
                 <h2 className="text-lg font-semibold text-[#17324d]">
                   Actions
                 </h2>
 
-                <p className="mt-4 text-sm text-[#667085]">
-                  Les actions de gestion seront ajoutées dans une
-                  prochaine étape.
+                <p className="mt-3 text-sm leading-6 text-[#667085]">
+                  Choisissez une action pour gérer cette réservation.
+                </p>
+
+                <div className="mt-6 space-y-3">
+                  <button
+                    type="button"
+                    disabled
+                    className="w-full cursor-not-allowed rounded-lg bg-green-600 px-4 py-3 text-sm font-medium text-white opacity-60"
+                  >
+                    Confirmer la réservation
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled
+                    className="w-full cursor-not-allowed rounded-lg bg-red-600 px-4 py-3 text-sm font-medium text-white opacity-60"
+                  >
+                    Refuser la réservation
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled
+                    className="w-full cursor-not-allowed rounded-lg border border-gray-300 px-4 py-3 text-sm font-medium text-gray-700 opacity-60"
+                  >
+                    Annuler la réservation
+                  </button>
+                </div>
+
+                <p className="mt-4 text-xs text-[#667085]">
+                  Les actions seront activées après la connexion à la base de données.
                 </p>
               </section>
 
