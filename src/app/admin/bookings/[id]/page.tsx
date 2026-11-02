@@ -94,13 +94,68 @@ export default async function BookingDetailsPage({
               </section>
 
               <section className="rounded-xl bg-white p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-[#17324d]">
-                  Détails du séjour
-                </h2>
-                <p className="mt-3 text-sm text-[#667085]">
-                  Les détails du séjour seront affichés ici.
-                </p>
+                <div className="mb-6 flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-[#17324d]">
+                    Détails du séjour
+                  </h2>
+
+                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
+                    Exemple
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <div>
+                    <p className="text-sm text-[#667085]">Date d’arrivée</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      Non renseignée
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[#667085]">Date de départ</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      Non renseignée
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[#667085]">Durée du séjour</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      Non renseignée
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[#667085]">Nombre de voyageurs</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      Non renseigné
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[#667085]">Logement attribué</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      Non attribué
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[#667085]">Heure d’arrivée</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      08:00
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-[#667085]">Heure de départ</p>
+                    <p className="mt-1 font-medium text-[#1f2933]">
+                      18:00
+                    </p>
+                  </div>
+                </div>
               </section>
+
 
               <section className="rounded-xl bg-white p-6 shadow-sm">
                 <h2 className="text-lg font-semibold text-[#17324d]">
