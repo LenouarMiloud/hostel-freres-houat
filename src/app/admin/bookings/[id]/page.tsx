@@ -18,6 +18,8 @@ export default async function BookingDetailsPage({
 
       <main className="p-4 md:ml-64 md:p-8">
         <div className="mx-auto max-w-7xl">
+
+          {/* Page Header */}
           <div className="mb-8">
             <p className="mb-2 text-sm text-[#667085]">
               Administration / Réservations / Détails
@@ -32,57 +34,68 @@ export default async function BookingDetailsPage({
             </p>
           </div>
 
-          <section className="rounded-xl bg-white p-6 shadow-sm">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-[#17324d]">
-                Informations du client
-              </h2>
+          {/* Responsive Two-Column Layout */}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
 
-              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
-                Exemple
-              </span>
+            {/* Left Column */}
+            <div className="space-y-6 lg:col-span-2">
+
+              <section className="rounded-xl bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-[#17324d]">
+                  Informations du client
+                </h2>
+                <p className="mt-3 text-sm text-[#667085]">
+                  Les informations du client seront affichées ici.
+                </p>
+              </section>
+
+              <section className="rounded-xl bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-[#17324d]">
+                  Détails du séjour
+                </h2>
+                <p className="mt-3 text-sm text-[#667085]">
+                  Les détails du séjour seront affichés ici.
+                </p>
+              </section>
+
+              <section className="rounded-xl bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-[#17324d]">
+                  Demandes particulières
+                </h2>
+                <p className="mt-3 text-sm text-[#667085]">
+                  Aucune demande affichée pour le moment.
+                </p>
+              </section>
+
             </div>
 
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <div>
-                <p className="text-sm text-[#667085]">Nom</p>
-                <p className="mt-1 font-medium text-[#1f2933]">Exemple</p>
-              </div>
+            {/* Right Column */}
+            <div className="space-y-6">
 
-              <div>
-                <p className="text-sm text-[#667085]">Prénom</p>
-                <p className="mt-1 font-medium text-[#1f2933]">Client</p>
-              </div>
+              <section className="rounded-xl bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-[#17324d]">
+                  Statut de réservation
+                </h2>
 
-              <div>
-                <p className="text-sm text-[#667085]">Téléphone</p>
-                <p className="mt-1 font-medium text-[#1f2933]">
-                  Non renseigné
+                <p className="mt-4 text-sm text-[#667085]">
+                  Le statut sera chargé depuis la base de données.
                 </p>
-              </div>
+              </section>
 
-              <div>
-                <p className="text-sm text-[#667085]">WhatsApp</p>
-                <p className="mt-1 font-medium text-[#1f2933]">
-                  Non renseigné
-                </p>
-              </div>
+              <section className="rounded-xl bg-white p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-[#17324d]">
+                  Actions
+                </h2>
 
-              <div>
-                <p className="text-sm text-[#667085]">Email</p>
-                <p className="mt-1 font-medium text-[#1f2933]">
-                  Non renseigné
+                <p className="mt-4 text-sm text-[#667085]">
+                  Les actions de gestion seront ajoutées dans une
+                  prochaine étape.
                 </p>
-              </div>
+              </section>
 
-              <div>
-                <p className="text-sm text-[#667085]">Date de réservation</p>
-                <p className="mt-1 font-medium text-[#1f2933]">
-                  Non renseignée
-                </p>
-              </div>
             </div>
-          </section>
+
+          </div>
         </div>
       </main>
     </div>
