@@ -158,12 +158,22 @@ export default async function BookingDetailsPage({
 
 
               <section className="rounded-xl bg-white p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-[#17324d]">
-                  Demandes particulières
-                </h2>
-                <p className="mt-3 text-sm text-[#667085]">
-                  Aucune demande affichée pour le moment.
-                </p>
+                <div className="mb-6 flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-[#17324d]">
+                    Demandes particulières
+                  </h2>
+
+                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
+                    Exemple
+                  </span>
+                </div>
+
+                <div className="rounded-lg border border-[#e5e7eb] bg-[#f8f6f1] p-4">
+                  <p className="text-sm leading-6 text-[#667085]">
+                    Aucune demande particulière n’a été renseignée pour cette
+                    réservation.
+                  </p>
+                </div>
               </section>
 
             </div>
