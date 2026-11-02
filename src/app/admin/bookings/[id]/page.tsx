@@ -181,14 +181,33 @@ export default async function BookingDetailsPage({
             {/* Right Column */}
             <div className="space-y-6">
 
+              
               <section className="rounded-xl bg-white p-6 shadow-sm">
                 <h2 className="text-lg font-semibold text-[#17324d]">
                   Statut de réservation
                 </h2>
 
-                <p className="mt-4 text-sm text-[#667085]">
-                  Le statut sera chargé depuis la base de données.
+                <div className="mt-5 flex items-center gap-3">
+                  <span className="h-3 w-3 rounded-full bg-amber-500" />
+
+                  <span className="rounded-full bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800">
+                    En attente
+                  </span>
+                </div>
+
+                <p className="mt-4 text-sm leading-6 text-[#667085]">
+                  Cette réservation attend la validation du gestionnaire.
                 </p>
+
+                <div className="mt-5 border-t border-gray-100 pt-4">
+                  <p className="text-xs text-[#667085]">
+                    Dernière mise à jour
+                  </p>
+
+                  <p className="mt-1 text-sm font-medium text-[#1f2933]">
+                    Non disponible
+                  </p>
+                </div>
               </section>
 
               <section className="rounded-xl bg-white p-6 shadow-sm">
