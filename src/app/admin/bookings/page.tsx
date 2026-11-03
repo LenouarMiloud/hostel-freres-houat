@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import AdminSidebar from "../components/AdminSidebar";
 import Link from "next/link";
 
@@ -29,6 +32,14 @@ const bookingStatuses = [
 ];
 
 export default function AdminBookingsPage() {
+  const [searchTerm, setSearchTerm] = useState("");
+
+const normalizedSearch = searchTerm.trim().toLowerCase();
+
+const matchesSearch = "1 client de démonstration"
+  .toLowerCase()
+  .includes(normalizedSearch);
+
   return (
     <main className="min-h-screen bg-background lg:pl-72">
       <AdminSidebar />
@@ -99,10 +110,38 @@ export default function AdminBookingsPage() {
                 >
                   Liste des réservations
                 </h2>
+                <div className="mt-4">
+                  <input
+                    type="text"
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    placeholder="Rechercher par numéro ou nom du client..."
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
+                  />
+                </div>
 
                 <p className="mt-1 text-sm text-muted">
                   Les demandes réelles apparaîtront ici après le branchement de la base de données.
                 </p>
+
+                <div className="mt-4">
+                  <label
+                    htmlFor="booking-search"
+                    className="mb-2 block text-sm font-medium text-primary"
+                  >
+                    Rechercher une réservation
+                  </label>
+
+                  <input
+                    id="booking-search"
+                    type="search"
+                    value={searchTerm}
+                    onChange={(event) => setSearchTerm(event.target.value)}
+                    placeholder="Numéro de réservation ou nom du client..."
+                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
+                  />
+                </div>
+
               </div>
 
               <span className="text-sm text-muted">
@@ -110,73 +149,82 @@ export default function AdminBookingsPage() {
               </span>
             </div>
 
+            {matchesSearch ? (
+
             <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5">
 
-              {/* Header */}
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <div className="mb-2 flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
-                      En attente
-                    </span>
+                {/* Header */}
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <div className="mb-2 flex flex-wrap items-center gap-2">
+                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                        En attente
+                      </span>
 
-                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
-                      Exemple
-                    </span>
+                      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
+                        Exemple
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-bold text-primary">
+                      Réservation #1
+                    </h3>
+
+                    <p className="mt-1 text-sm text-muted">
+                      Client de démonstration
+                    </p>
                   </div>
 
-                  <h3 className="text-lg font-bold text-primary">
-                    Réservation #1
-                  </h3>
-
-                  <p className="mt-1 text-sm text-muted">
-                    Client de démonstration
-                  </p>
+                  <Link
+                    href="/admin/bookings/1"
+                    className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition hover:bg-secondary sm:w-auto sm:px-4 sm:py-2.5"
+                  >
+                    Voir les détails
+                  </Link>
                 </div>
 
-                <Link
-                  href="/admin/bookings/1"
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition hover:bg-secondary sm:w-auto sm:px-4 sm:py-2.5"
-                >
-                  Voir les détails
-                </Link>
+                {/* Booking Information */}
+                <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+
+                  <div>
+                    <p className="text-xs text-muted">Arrivée</p>
+                    <p className="mt-1 font-medium text-primary">
+                      Non renseignée
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs text-muted">Départ</p>
+                    <p className="mt-1 font-medium text-primary">
+                      Non renseigné
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs text-muted">Voyageurs</p>
+                    <p className="mt-1 font-medium text-primary">
+                      Non renseigné
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs text-muted">Logement</p>
+                    <p className="mt-1 font-medium text-primary">
+                      Non attribué
+                    </p>
+                  </div>
+
+                </div>
               </div>
-
-              {/* Booking Information */}
-              <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-
-                <div>
-                  <p className="text-xs text-muted">Arrivée</p>
-                  <p className="mt-1 font-medium text-primary">
-                    Non renseignée
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-muted">Départ</p>
-                  <p className="mt-1 font-medium text-primary">
-                    Non renseigné
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-muted">Voyageurs</p>
-                  <p className="mt-1 font-medium text-primary">
-                    Non renseigné
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-xs text-muted">Logement</p>
-                  <p className="mt-1 font-medium text-primary">
-                    Non attribué
-                  </p>
-                </div>
-
-              </div>
-            </div>
           </div>
+          ) : (
+            <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-6 text-center">
+              <p className="text-sm text-muted">
+                Aucune réservation ne correspond à votre recherche.
+              </p>
+            </div>
+          )}            
           </section>
         </div>
       </div>
