@@ -111,140 +111,72 @@ export default function AdminBookingsPage() {
             </div>
 
             <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
 
-                {/* Header */}
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <div className="mb-2 flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
-                        En attente
-                      </span>
+              {/* Header */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
+                      En attente
+                    </span>
 
-                      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
-                        Exemple
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-primary">
-                      Réservation #1
-                    </h3>
-
-                    <p className="mt-1 text-sm text-muted">
-                      Client de démonstration
-                    </p>
+                    <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
+                      Exemple
+                    </span>
                   </div>
 
-                  <Link
-                    href="/admin/bookings/1"
-                    className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:bg-secondary"
-                  >
-                    Voir les détails
-                  </Link>
+                  <h3 className="text-lg font-bold text-primary">
+                    Réservation #1
+                  </h3>
+
+                  <p className="mt-1 text-sm text-muted">
+                    Client de démonstration
+                  </p>
                 </div>
 
-                {/* Booking Information */}
-                <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
+                <Link
+                  href="/admin/bookings/1"
+                  className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition hover:bg-secondary sm:w-auto sm:px-4 sm:py-2.5"
+                >
+                  Voir les détails
+                </Link>
+              </div>
 
-                  <div>
-                    <p className="text-xs text-muted">Arrivée</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non renseignée
-                    </p>
-                  </div>
+              {/* Booking Information */}
+              <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
 
-                  <div>
-                    <p className="text-xs text-muted">Départ</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non renseigné
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-muted">Voyageurs</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non renseigné
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-muted">Logement</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non attribué
-                    </p>
-                  </div>
-
+                <div>
+                  <p className="text-xs text-muted">Arrivée</p>
+                  <p className="mt-1 font-medium text-primary">
+                    Non renseignée
+                  </p>
                 </div>
+
+                <div>
+                  <p className="text-xs text-muted">Départ</p>
+                  <p className="mt-1 font-medium text-primary">
+                    Non renseigné
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-muted">Voyageurs</p>
+                  <p className="mt-1 font-medium text-primary">
+                    Non renseigné
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-xs text-muted">Logement</p>
+                  <p className="mt-1 font-medium text-primary">
+                    Non attribué
+                  </p>
+                </div>
+
               </div>
             </div>
-
-            <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-              <div className="flex flex-col gap-5">
-
-                {/* Header */}
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div>
-                    <div className="mb-2 flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
-                        En attente
-                      </span>
-
-                      <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-500">
-                        Exemple
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg font-bold text-primary">
-                      Réservation #1
-                    </h3>
-
-                    <p className="mt-1 text-sm text-muted">
-                      Client de démonstration
-                    </p>
-                  </div>
-
-                  <Link
-                    href="/admin/bookings/1"
-                    className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition hover:bg-secondary"
-                  >
-                    Voir les détails
-                  </Link>
-                </div>
-
-                {/* Booking Information */}
-                <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-
-                  <div>
-                    <p className="text-xs text-muted">Arrivée</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non renseignée
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-muted">Départ</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non renseigné
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-muted">Voyageurs</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non renseigné
-                    </p>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-muted">Logement</p>
-                    <p className="mt-1 font-medium text-primary">
-                      Non attribué
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+          </div>
           </section>
         </div>
       </div>
