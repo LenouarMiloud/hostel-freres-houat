@@ -36,9 +36,18 @@ export default function AdminBookingsPage() {
 
 const normalizedSearch = searchTerm.trim().toLowerCase();
 
+const [selectedStatus, setSelectedStatus] = useState("Toutes");
+
 const matchesSearch = "1 client de démonstration"
   .toLowerCase()
   .includes(normalizedSearch);
+
+const bookingStatus = "En attente";
+
+const matchesStatus =
+  selectedStatus === "Toutes" || selectedStatus === bookingStatus;
+
+const shouldDisplayBooking = matchesSearch && matchesStatus;
 
   return (
     <main className="min-h-screen bg-background lg:pl-72">
@@ -120,6 +129,29 @@ const matchesSearch = "1 client de démonstration"
                   />
                 </div>
 
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {[
+                    "Toutes",
+                    "En attente",
+                    "Confirmées",
+                    "Refusées",
+                    "Annulées",
+                  ].map((status) => (
+                    <button
+                      key={status}
+                      type="button"
+                      onClick={() => setSelectedStatus(status)}
+                      className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+                        selectedStatus === status
+                          ? "bg-primary text-white"
+                          : "border border-gray-200 bg-white text-primary hover:bg-gray-50"
+                      }`}
+                    >
+                      {status}
+                    </button>
+                  ))}
+                </div>
+
                 <p className="mt-1 text-sm text-muted">
                   Les demandes réelles apparaîtront ici après le branchement de la base de données.
                 </p>
@@ -149,7 +181,7 @@ const matchesSearch = "1 client de démonstration"
               </span>
             </div>
 
-            {matchesSearch ? (
+            {shouldDisplayBooking ? (
 
             <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
               <div className="flex flex-col gap-5">
