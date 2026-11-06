@@ -49,6 +49,13 @@ const matchesStatus =
 
 const shouldDisplayBooking = matchesSearch && matchesStatus;
 
+const displayedBookingsCount = shouldDisplayBooking ? 1 : 0;
+
+const bookingsCountLabel =
+  displayedBookingsCount === 1
+    ? "1 réservation affichée"
+    : `${displayedBookingsCount} réservation affichée`;
+
   return (
     <main className="min-h-screen bg-background lg:pl-72">
       <AdminSidebar />
@@ -177,7 +184,10 @@ const shouldDisplayBooking = matchesSearch && matchesStatus;
               </div>
 
               <span className="text-sm text-muted">
-                0 réservation affichée
+                {displayedBookingsCount}{" "}
+                {displayedBookingsCount === 1
+                  ? "réservation affichée"
+                  : "réservations affichées"}
               </span>
             </div>
 
