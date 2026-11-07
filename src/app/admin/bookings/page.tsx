@@ -71,6 +71,23 @@ const bookingsCountLabel =
     ? "1 réservation affichée"
     : `${displayedBookingsCount} réservations affichées`;
 
+const [currentPage, setCurrentPage] = useState(1);
+
+const bookingsPerPage = 5; 
+
+const totalPages = Math.max(
+  1,
+  Math.ceil(filteredBookings.length / bookingsPerPage)
+);
+
+const startIndex = (currentPage - 1) * bookingsPerPage;
+
+const paginatedBookings = filteredBookings.slice(
+  startIndex,
+  startIndex + bookingsPerPage
+);
+   
+
   return (
     <main className="min-h-screen bg-background lg:pl-72">
       <AdminSidebar />
@@ -210,7 +227,7 @@ const bookingsCountLabel =
             {filteredBookings.length > 0 ? (
 
             <div className="mt-5 space-y-4">
-  {filteredBookings.map((booking) => (
+  {paginatedBookings.map((booking) => (
     <div
       key={booking.id}
       className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
