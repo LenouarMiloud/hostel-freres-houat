@@ -119,69 +119,35 @@ const bookingsCountLabel =
 
           <section aria-labelledby="booking-list-heading">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2
-                  id="booking-list-heading"
-                  className="text-lg font-bold text-primary"
-                >
-                  Liste des réservations
-                </h2>
-                <div className="mt-4">
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                    placeholder="Rechercher par numéro ou nom du client..."
-                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
-                  />
-                </div>
+              <div className="mt-4">
+  <label
+    htmlFor="booking-search"
+    className="mb-2 block text-sm font-medium text-primary"
+  >
+    Rechercher une réservation
+  </label>
 
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {[
-                    "Toutes",
-                    "En attente",
-                    "Confirmées",
-                    "Refusées",
-                    "Annulées",
-                  ].map((status) => (
-                    <button
-                      key={status}
-                      type="button"
-                      onClick={() => setSelectedStatus(status)}
-                      className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
-                        selectedStatus === status
-                          ? "bg-primary text-white"
-                          : "border border-gray-200 bg-white text-primary hover:bg-gray-50"
-                      }`}
-                    >
-                      {status}
-                    </button>
-                  ))}
-                </div>
+  <div className="flex flex-col gap-2 sm:flex-row">
+    <input
+      id="booking-search"
+      type="search"
+      value={searchTerm}
+      onChange={(event) => setSearchTerm(event.target.value)}
+      placeholder="Numéro de réservation ou nom du client..."
+      className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
+    />
 
-                <p className="mt-1 text-sm text-muted">
-                  Les demandes réelles apparaîtront ici après le branchement de la base de données.
-                </p>
-
-                <div className="mt-4">
-                  <label
-                    htmlFor="booking-search"
-                    className="mb-2 block text-sm font-medium text-primary"
-                  >
-                    Rechercher une réservation
-                  </label>
-
-                  <input
-                    id="booking-search"
-                    type="search"
-                    value={searchTerm}
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                    placeholder="Numéro de réservation ou nom du client..."
-                    className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
-                  />
-                </div>
-
-              </div>
+    {searchTerm.trim().length > 0 && (
+      <button
+        type="button"
+        onClick={() => setSearchTerm("")}
+        className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-primary transition hover:bg-gray-50"
+      >
+        Effacer
+      </button>
+    )}
+  </div>
+</div>
 
               <span className="text-sm text-muted">
                 {displayedBookingsCount}{" "}
