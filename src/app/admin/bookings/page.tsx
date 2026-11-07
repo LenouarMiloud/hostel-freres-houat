@@ -171,7 +171,7 @@ const paginatedBookings = filteredBookings.slice(
       id="booking-search"
       type="search"
       value={searchTerm}
-      onChange={(event) => setSearchTerm(event.target.value)}
+      onChange={(event) => {setSearchTerm(event.target.value);setCurrentPage(1);}}
       placeholder="Numéro de réservation ou nom du client..."
       className="min-w-0 flex-1 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
     />
@@ -179,7 +179,7 @@ const paginatedBookings = filteredBookings.slice(
     {searchTerm.trim().length > 0 && (
       <button
         type="button"
-        onClick={() => setSearchTerm("")}
+        onClick={() => {setSearchTerm("");setCurrentPage(1);}}
         className="rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-primary transition hover:bg-gray-50"
       >
         Effacer
@@ -199,7 +199,7 @@ const paginatedBookings = filteredBookings.slice(
                     <button
                       key={status}
                       type="button"
-                      onClick={() => setSelectedStatus(status)}
+                      onClick={() => {setSelectedStatus(status);setCurrentPage(1);}}
                       className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
                         selectedStatus === status
                           ? "bg-primary text-white"
@@ -294,6 +294,40 @@ const paginatedBookings = filteredBookings.slice(
       </div>
     </div>
   ))}
+
+{filteredBookings.length > 0 && (
+  <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-5 sm:flex-row">
+    <p className="text-sm text-muted">
+      Page {currentPage} sur {totalPages}
+    </p>
+
+    <div className="flex gap-2">
+      <button
+        type="button"
+        onClick={() =>
+          setCurrentPage((page) => Math.max(1, page - 1))
+        }
+        disabled={currentPage === 1}
+        className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        Précédent
+      </button>
+
+      <button
+        type="button"
+        onClick={() =>
+          setCurrentPage((page) => Math.min(totalPages, page + 1))
+        }
+        disabled={currentPage === totalPages}
+        className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        Suivant
+      </button>
+    </div>
+  </div>
+)}
+
+
 </div>
           ) : (
             <div className="mt-5 rounded-2xl border border-gray-200 bg-white p-6 text-center">
