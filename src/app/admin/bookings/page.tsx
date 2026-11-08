@@ -301,29 +301,47 @@ const paginatedBookings = filteredBookings.slice(
       Page {currentPage} sur {totalPages}
     </p>
 
-    <div className="flex gap-2">
-      <button
-        type="button"
-        onClick={() =>
-          setCurrentPage((page) => Math.max(1, page - 1))
-        }
-        disabled={currentPage === 1}
-        className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        Précédent
-      </button>
+    <div className="flex flex-wrap items-center justify-center gap-2">
+  <button
+    type="button"
+    onClick={() =>
+      setCurrentPage((page) => Math.max(1, page - 1))
+    }
+    disabled={currentPage === 1}
+    className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-primary transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+  >
+    Précédent
+  </button>
 
+  {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+    (page) => (
       <button
+        key={page}
         type="button"
-        onClick={() =>
-          setCurrentPage((page) => Math.min(totalPages, page + 1))
-        }
-        disabled={currentPage === totalPages}
-        className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-primary transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+        onClick={() => setCurrentPage(page)}
+        aria-current={currentPage === page ? "page" : undefined}
+        className={`min-w-10 rounded-lg px-3 py-2 text-sm font-medium transition ${
+          currentPage === page
+            ? "bg-primary text-white"
+            : "border border-gray-200 bg-white text-primary hover:bg-gray-50"
+        }`}
       >
-        Suivant
+        {page}
       </button>
-    </div>
+    )
+  )}
+
+  <button
+    type="button"
+    onClick={() =>
+      setCurrentPage((page) => Math.min(totalPages, page + 1))
+    }
+    disabled={currentPage === totalPages}
+    className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-primary transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+  >
+    Suivant
+  </button>
+</div>
   </div>
 )}
 
