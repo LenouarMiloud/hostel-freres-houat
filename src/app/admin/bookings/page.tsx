@@ -86,6 +86,14 @@ const paginatedBookings = filteredBookings.slice(
   startIndex,
   startIndex + bookingsPerPage
 );
+
+const displayedStart =
+  filteredBookings.length === 0 ? 0 : startIndex + 1;
+
+const displayedEnd = Math.min(
+  startIndex + paginatedBookings.length,
+  filteredBookings.length
+);
    
 
   return (
@@ -297,9 +305,13 @@ const paginatedBookings = filteredBookings.slice(
 
 {filteredBookings.length > 0 && (
   <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-5 sm:flex-row">
-    <p className="text-sm text-muted">
-      Page {currentPage} sur {totalPages}
-    </p>
+    
+    <div className="text-center sm:text-left">
+  <p className="mt-1 text-xs text-muted">
+    Affichage de {displayedStart} à {displayedEnd} sur{" "}
+    {displayedBookingsCount} réservations
+  </p>
+</div>
 
     <div className="flex flex-wrap items-center justify-center gap-2">
   <button
