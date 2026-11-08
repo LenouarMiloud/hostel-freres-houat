@@ -32,18 +32,90 @@ const bookingStatuses = [
 ];
 
 const demoBookings = [
-  { id: 1, name: "Client de démonstration 1", status: "En attente" },
-  { id: 2, name: "Ahmed Benali", status: "Confirmées" },
-  { id: 3, name: "Mohamed Boudiaf", status: "En attente" },
-  { id: 4, name: "Karim Mansouri", status: "Refusées" },
-  { id: 5, name: "Amine Haddad", status: "Confirmées" },
-  { id: 6, name: "Samir Khelifi", status: "Annulées" },
-  { id: 7, name: "Yacine Belkacem", status: "En attente" },
-  { id: 8, name: "Nadir Merabet", status: "Confirmées" },
-  { id: 9, name: "Rachid Saidi", status: "Refusées" },
-  { id: 10, name: "Sofiane Amrani", status: "En attente" },
-  { id: 11, name: "Walid Cherif", status: "Confirmées" },
-  { id: 12, name: "Mourad Djelloul", status: "Annulées" },
+  {
+    id: 1,
+    name: "Client de démonstration 1",
+    status: "En attente",
+    bookingDate: "2026-10-25",
+    arrivalDate: "2026-11-15",
+  },
+  {
+    id: 2,
+    name: "Ahmed Benali",
+    status: "Confirmées",
+    bookingDate: "2026-10-28",
+    arrivalDate: "2026-11-20",
+  },
+  {
+    id: 3,
+    name: "Mohamed Boudiaf",
+    status: "En attente",
+    bookingDate: "2026-10-30",
+    arrivalDate: "2026-11-12",
+  },
+  {
+    id: 4,
+    name: "Karim Mansouri",
+    status: "Refusées",
+    bookingDate: "2026-10-22",
+    arrivalDate: "2026-11-18",
+  },
+  {
+    id: 5,
+    name: "Amine Haddad",
+    status: "Confirmées",
+    bookingDate: "2026-11-01",
+    arrivalDate: "2026-11-25",
+  },
+  {
+    id: 6,
+    name: "Samir Khelifi",
+    status: "Annulées",
+    bookingDate: "2026-10-20",
+    arrivalDate: "2026-11-10",
+  },
+  {
+    id: 7,
+    name: "Yacine Belkacem",
+    status: "En attente",
+    bookingDate: "2026-11-02",
+    arrivalDate: "2026-11-22",
+  },
+  {
+    id: 8,
+    name: "Nadir Merabet",
+    status: "Confirmées",
+    bookingDate: "2026-10-27",
+    arrivalDate: "2026-11-14",
+  },
+  {
+    id: 9,
+    name: "Rachid Saidi",
+    status: "Refusées",
+    bookingDate: "2026-10-23",
+    arrivalDate: "2026-11-17",
+  },
+  {
+    id: 10,
+    name: "Sofiane Amrani",
+    status: "En attente",
+    bookingDate: "2026-11-03",
+    arrivalDate: "2026-11-13",
+  },
+  {
+    id: 11,
+    name: "Walid Cherif",
+    status: "Confirmées",
+    bookingDate: "2026-10-29",
+    arrivalDate: "2026-11-24",
+  },
+  {
+    id: 12,
+    name: "Mourad Djelloul",
+    status: "Annulées",
+    bookingDate: "2026-10-21",
+    arrivalDate: "2026-11-16",
+  },
 ];
 
 export default function AdminBookingsPage() {
@@ -270,35 +342,46 @@ const displayedEnd = Math.min(
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <p className="text-xs text-muted">Arrivée</p>
-            <p className="mt-1 font-medium text-primary">
-              Non renseignée
-            </p>
-          </div>
+        <div className="grid grid-cols-1 gap-4 border-t border-gray-100 pt-5 sm:grid-cols-2 lg:grid-cols-3">
+  <div>
+    <p className="text-xs text-muted">Date de réservation</p>
+    <p className="mt-1 font-medium text-primary">
+      {new Date(booking.bookingDate + "T12:00:00").toLocaleDateString(
+        "fr-FR"
+      )}
+    </p>
+  </div>
 
-          <div>
-            <p className="text-xs text-muted">Départ</p>
-            <p className="mt-1 font-medium text-primary">
-              Non renseigné
-            </p>
-          </div>
+  <div>
+    <p className="text-xs text-muted">Date d'arrivée</p>
+    <p className="mt-1 font-medium text-primary">
+      {new Date(booking.arrivalDate + "T12:00:00").toLocaleDateString(
+        "fr-FR"
+      )}
+    </p>
+  </div>
 
-          <div>
-            <p className="text-xs text-muted">Voyageurs</p>
-            <p className="mt-1 font-medium text-primary">
-              Non renseigné
-            </p>
-          </div>
+  <div>
+    <p className="text-xs text-muted">Départ</p>
+    <p className="mt-1 font-medium text-primary">
+      Non renseigné
+    </p>
+  </div>
 
-          <div>
-            <p className="text-xs text-muted">Logement</p>
-            <p className="mt-1 font-medium text-primary">
-              Non attribué
-            </p>
-          </div>
-        </div>
+  <div>
+    <p className="text-xs text-muted">Voyageurs</p>
+    <p className="mt-1 font-medium text-primary">
+      Non renseigné
+    </p>
+  </div>
+
+  <div>
+    <p className="text-xs text-muted">Logement</p>
+    <p className="mt-1 font-medium text-primary">
+      Non attribué
+    </p>
+  </div>
+</div>
       </div>
     </div>
   ))}
