@@ -136,7 +136,34 @@ const filteredBookings = demoBookings.filter((booking) => {
   return matchesSearch && matchesStatus;
 });
 
+const [sortBy, setSortBy] = useState("id");
+const [sortDirection, setSortDirection] = useState("asc");
+
 const displayedBookingsCount = filteredBookings.length;
+
+const sortedBookings = [...filteredBookings].sort((a, b) => {
+  let comparison = 0;
+
+  switch (sortBy) {
+    case "id":
+      comparison = a.id - b.id;
+      break;
+
+    case "name":
+      comparison = a.name.localeCompare(b.name, "fr");
+      break;
+
+    case "bookingDate":
+      comparison = a.bookingDate.localeCompare(b.bookingDate);
+      break;
+
+    case "arrivalDate":
+      comparison = a.arrivalDate.localeCompare(b.arrivalDate);
+      break;
+  }
+
+  return sortDirection === "asc" ? comparison : -comparison;
+});
 
 const bookingsCountLabel =
   displayedBookingsCount === 1
@@ -154,7 +181,7 @@ const totalPages = Math.max(
 
 const startIndex = (currentPage - 1) * bookingsPerPage;
 
-const paginatedBookings = filteredBookings.slice(
+const paginatedBookings = sortedBookings.slice(
   startIndex,
   startIndex + bookingsPerPage
 );
@@ -290,6 +317,54 @@ const displayedEnd = Math.min(
                     </button>
                   ))}
                 </div>
+
+                <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <div>
+    <label
+      htmlFor="booking-sort"
+      className="mb-2 block text-sm font-medium text-primary"
+    >
+      Trier par
+    </label>
+
+    <select
+      id="booking-sort"
+      value={sortBy}
+      onChange={(event) => {
+        setSortBy(event.target.value);
+        setCurrentPage(1);
+      }}
+      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
+    >
+      <option value="id">Numéro de réservation</option>
+      <option value="name">Nom du client</option>
+      <option value="bookingDate">Date de réservation</option>
+      <option value="arrivalDate">Date d'arrivée</option>
+    </select>
+  </div>
+
+  <div>
+    <label
+      htmlFor="booking-sort-direction"
+      className="mb-2 block text-sm font-medium text-primary"
+    >
+      Ordre
+    </label>
+
+    <select
+      id="booking-sort-direction"
+      value={sortDirection}
+      onChange={(event) => {
+        setSortDirection(event.target.value);
+        setCurrentPage(1);
+      }}
+      className="w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm text-primary outline-none transition focus:border-secondary focus:ring-2 focus:ring-secondary/20"
+    >
+      <option value="asc">Croissant (A → Z)</option>
+      <option value="desc">Décroissant (Z → A)</option>
+    </select>
+  </div>
+</div>
 
                 <p className="mt-1 text-sm text-muted">
                   Les demandes réelles apparaîtront ici après le branchement de la base de données.
